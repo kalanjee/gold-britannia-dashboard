@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Britannia Intelligence Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0" integrity="sha384-cVMg8E3QFwTvGCDuK+ET4PD341jF3W8nO1auiXfuZNQkzbUUiBGLsIQUE+b1mxws" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #1c2333;
+            --bg-hover: #1f2937;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --gold: #f0b90b;
+            --gold-dim: #c99a08;
+            --positive: #3fb950;
+            --negative: #f85149;
+            --neutral: #8b949e;
+            --blue: #58a6ff;
+            --purple: #bc8cff;
+            --cyan: #39d2c0;
+            --orange: #f0883e;
+            --pink: #f778ba;
+            --gap: 14px;
+            --radius: 10px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.5; }
+        .dashboard { max-width: 1500px; margin: 0 auto; padding: var(--gap); }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: var(--radius); padding: 20px 28px; margin-bottom: var(--gap); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border: 1px solid var(--border); }
+        .header-left { display: flex; align-items: center; gap: 14px; }
+        .header h1 { font-size: 22px; font-weight: 700; color: var(--gold); }
+        .header h1 span { color: var(--text-secondary); font-weight: 400; font-size: 14px; }
+        .header-right { display: flex; align-items: center; gap: 16px; }
+        .last-updated { font-size: 12px; color: var(--text-muted); }
+        .refresh-btn { background: var(--gold); color: #000; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; transition: opacity 0.2s; }
+        .refresh-btn:hover { opacity: 0.85; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--positive); display: inline-block; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+        /* Alert Banner */
+        .alert-banner { background: linear-gradient(90deg, rgba(248,81,73,0.15), rgba(248,81,73,0.05)); border: 1px solid rgba(248,81,73,0.4); border-radius: var(--radius); padding: 14px 20px; margin-bottom: var(--gap); display: none; }
+        .alert-banner.active { display: flex; align-items: center; gap: 12px; }
+        .alert-banner.bullish { background: linear-gradient(90deg, rgba(63,185,80,0.15), rgba(63,185,80,0.05)); border-color: rgba(63,185,80,0.4); }
+        .alert-icon { font-size: 20px; }
+        .alert-text { font-size: 14px; font-weight: 500; }
+        .alert-detail { font-size: 12px; color: var(--text-secondary); }
+
+        /* Composite Signal */
+        .signal-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--gap); margin-bottom: var(--gap); }
+        .signal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; text-align: center; }
+        .signal-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 6px; }
+        .signal-value { font-size: 36px; font-weight: 800; }
+        .signal-value.bullish { color: var(--positive); }
+        .signal-value.bearish { color: var(--negative); }
+        .signal-value.neutral { color: var(--gold); }
+        .signal-sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+        /* KPI Row */
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: var(--gap); margin-bottom: var(--gap); }
+        .kpi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; transition: border-color 0.2s; }
+        .kpi-card:hover { border-color: var(--gold-dim); }
+        .kpi-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .kpi-value { font-size: 22px; font-weight: 700; color: var(--text-primary); }
+        .kpi-change { font-size: 12px; font-weight: 500; margin-top: 2px; }
+        .kpi-change.positive { color: var(--positive); }
+        .kpi-change.negative { color: var(--negative); }
+        .kpi-change.neutral { color: var(--text-muted); }
+        .kpi-impact { font-size: 10px; color: var(--text-muted); margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--border); }
+        .kpi-impact .bullish { color: var(--positive); font-weight: 600; }
+        .kpi-impact .bearish { color: var(--negative); font-weight: 600; }
+
+        /* Section Tabs */
+        .section-tabs { display: flex; gap: 4px; margin-bottom: var(--gap); flex-wrap: wrap; }
+        .tab-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); padding: 8px 16px; border-radius: 6px; font-size: 13px; cursor: pointer; transition: all 0.2s; font-weight: 500; }
+        .tab-btn:hover { border-color: var(--gold-dim); color: var(--text-primary); }
+        .tab-btn.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 600; }
+
+        /* Chart Grid */
+        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: var(--gap); margin-bottom: var(--gap); }
+        .chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+        .chart-card h3 { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .chart-card canvas { max-height: 280px; }
+        .chart-full { grid-column: 1 / -1; }
+
+        /* Variable Table */
+        .table-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: var(--gap); overflow-x: auto; }
+        .table-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 14px; color: var(--text-secondary); }
+        .filter-bar { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+        .filter-bar select, .filter-bar input { background: var(--bg-primary); border: 1px solid var(--border); color: var(--text-primary); padding: 6px 10px; border-radius: 6px; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        thead th { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; user-select: none; white-space: nowrap; }
+        thead th:hover { color: var(--text-primary); }
+        tbody td { padding: 10px 12px; border-bottom: 1px solid rgba(48,54,61,0.5); }
+        tbody tr:hover { background: var(--bg-hover); }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+        .badge-critical { background: rgba(248,81,73,0.15); color: var(--negative); }
+        .badge-high { background: rgba(240,185,11,0.15); color: var(--gold); }
+        .badge-medium { background: rgba(88,166,255,0.15); color: var(--blue); }
+        .badge-low { background: rgba(139,148,158,0.15); color: var(--text-secondary); }
+        .signal-chip { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+        .signal-bullish { background: rgba(63,185,80,0.15); color: var(--positive); }
+        .signal-bearish { background: rgba(248,81,73,0.15); color: var(--negative); }
+        .signal-neutral-chip { background: rgba(139,148,158,0.1); color: var(--text-muted); }
+
+        /* Data Sources Panel */
+        .sources-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: var(--gap); }
+        .sources-panel h3 { font-size: 14px; font-weight: 600; margin-bottom: 14px; color: var(--text-secondary); }
+        .source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
+        .source-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg-primary); border-radius: 6px; font-size: 12px; }
+        .source-item .name { color: var(--text-primary); font-weight: 500; }
+        .source-item .status { font-size: 11px; }
+        .source-item .status.ok { color: var(--positive); }
+        .source-item .status.warn { color: var(--orange); }
+        .source-item .status.err { color: var(--negative); }
+
+        /* Footer */
+        .footer { text-align: center; padding: 16px; color: var(--text-muted); font-size: 12px; }
+        .footer a { color: var(--blue); text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .signal-strip { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .chart-grid { grid-template-columns: 1fr; }
+        }
+        @media print {
+            body { background: #fff; color: #000; }
+            .header { background: #f5f5f5; }
+            .kpi-card, .chart-card, .table-section { border: 1px solid #ddd; background: #fff; }
+        }
+
+        /* Tooltip */
+        .tooltip-icon { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--border); color: var(--text-muted); font-size: 10px; text-align: center; line-height: 14px; cursor: help; margin-left: 4px; position: relative; }
+        .tooltip-icon:hover::after { content: attr(data-tip); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #000; color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 11px; white-space: nowrap; z-index: 100; max-width: 280px; white-space: normal; }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <div>
+                <h1>&#x1F947; Gold Britannia Intelligence <span>| 1oz UK Coin Tracker</span></h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <span class="last-updated"><span class="status-dot"></span> Last updated: <span id="lastUpdate">--</span></span>
+            <button class="refresh-btn" onclick="location.reload()">Refresh</button>
+        </div>
+    </div>
+
+    <!-- Alert Banner -->
+    <div class="alert-banner" id="alertBanner">
+        <span class="alert-icon" id="alertIcon"></span>
+        <div>
+            <div class="alert-text" id="alertText"></div>
+            <div class="alert-detail" id="alertDetail"></div>
+        </div>
+    </div>
+
+    <!-- Composite Signal Strip -->
+    <div class="signal-strip">
+        <div class="signal-card">
+            <div class="signal-label">Composite Gold Signal</div>
+            <div class="signal-value" id="compositeSignal">--</div>
+            <div class="signal-sub" id="compositeDetail">Aggregating 28 variables</div>
+        </div>
+        <div class="signal-card">
+            <div class="signal-label">Estimated Britannia Price (GBP)</div>
+            <div class="signal-value" style="color:var(--gold)" id="britanniaPrice">--</div>
+            <div class="signal-sub" id="britanniaChange">Spot + Premium (VAT-Free)</div>
+        </div>
+        <div class="signal-card">
+            <div class="signal-label">5% Move Probability (30d)</div>
+            <div class="signal-value" id="moveProbability">--</div>
+            <div class="signal-sub" id="moveProbDetail">Based on volatility & macro signals</div>
+        </div>
+    </div>
+
+    <!-- KPI Row: Direct Price Factors -->
+    <div class="kpi-row" id="kpiRow"></div>
+
+    <!-- Section Tabs -->
+    <div class="section-tabs">
+        <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+        <button class="tab-btn" onclick="switchTab('macro')">Macro & Rates</button>
+        <button class="tab-btn" onclick="switchTab('sentiment')">Sentiment</button>
+        <button class="tab-btn" onclick="switchTab('fx')">FX & Currency</button>
+        <button class="tab-btn" onclick="switchTab('commodities')">Commodities</button>
+        <button class="tab-btn" onclick="switchTab('geopolitical')">Geopolitical</button>
+        <button class="tab-btn" onclick="switchTab('signals')">Signal Analysis</button>
+    </div>
+
+    <!-- Chart Grid -->
+    <div class="chart-grid" id="chartGrid">
+        <div class="chart-card chart-full" id="priceChartCard">
+            <h3>Gold Spot Price & Britannia Estimate (GBP) — 90 Day</h3>
+            <canvas id="priceChart"></canvas>
+        </div>
+        <div class="chart-card" id="macroChartCard">
+            <h3>Interest Rates vs Gold Price</h3>
+            <canvas id="macroChart"></canvas>
+        </div>
+        <div class="chart-card" id="fxChartCard">
+            <h3>FX Rates Impact</h3>
+            <canvas id="fxChart"></canvas>
+        </div>
+        <div class="chart-card" id="sentimentChartCard">
+            <h3>Market Sentiment Indicators</h3>
+            <canvas id="sentimentChart"></canvas>
+        </div>
+        <div class="chart-card" id="commoditiesChartCard">
+            <h3>Commodities Complex</h3>
+            <canvas id="commoditiesChart"></canvas>
+        </div>
+        <div class="chart-card chart-full" id="signalChartCard" style="display:none">
+            <h3>Variable Signal Heatmap — Bullish / Bearish / Neutral</h3>
+            <canvas id="signalChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Full Variable Table -->
+    <div class="table-section">
+        <h3>All 28 Tracked Variables</h3>
+        <div class="filter-bar">
+            <select id="filterCategory" onchange="renderTable()">
+                <option value="all">All Categories</option>
+                <option value="Direct Price">Direct Price</option>
+                <option value="Macroeconomic">Macroeconomic</option>
+                <option value="Sentiment">Sentiment</option>
+                <option value="FX & Currency">FX & Currency</option>
+                <option value="Commodities">Commodities</option>
+                <option value="Geopolitical">Geopolitical</option>
+            </select>
+            <select id="filterImportance" onchange="renderTable()">
+                <option value="all">All Importance</option>
+                <option value="Critical">Critical</option>
+                <option value="Very High">Very High</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+            </select>
+            <select id="filterSignal" onchange="renderTable()">
+                <option value="all">All Signals</option>
+                <option value="Bullish">Bullish</option>
+                <option value="Bearish">Bearish</option>
+                <option value="Neutral">Neutral</option>
+            </select>
+        </div>
+        <div id="variableTable"></div>
+    </div>
+
+    <!-- Data Source Status -->
+    <div class="sources-panel">
+        <h3>Data Sources & API Status</h3>
+        <div class="source-grid" id="sourceGrid"></div>
+    </div>
+
+    <div class="footer">
+        Gold Britannia Intelligence Dashboard &mdash; Data refreshed by Python script<br>
+        <em>Important: Gold Britannia coins are VAT-free and CGT-exempt as UK legal tender. Prices shown exclude dealer markup.</em><br>
+        <span style="color:var(--text-muted)">Built for Nikhil &mdash; Run <code>python gold_refresh.py</code> to update</span>
+    </div>
+</div>
+
+<script>
+// ========== SAMPLE DATA (replaced by Python refresh script) ==========
+// This data structure is what gold_refresh.py generates and injects
+const DASHBOARD_DATA = {
+    last_updated: "2026-03-16T14:30:00Z",
+
+    // Current values
+    gold_spot_usd: 2985.40,
+    gold_spot_gbp: 2345.67,
+    gbp_usd: 1.2725,
+    britannia_premium_pct: 3.8,
+    britannia_price_gbp: 2434.77,
+    britannia_price_prev: 2389.50,
+
+    // 28 Variables
+    variables: [
+        // === DIRECT PRICE FACTORS ===
+        { id: 1, name: "Gold Spot (XAU/USD)", category: "Direct Price", importance: "Critical", value: 2985.40, unit: "$", change_pct: 1.2, signal: "Bullish", reason: "Above 50-day MA, uptrend intact", source: "Metals.live" },
+        { id: 2, name: "GBP/USD Rate", category: "Direct Price", importance: "Critical", value: 1.2725, unit: "", change_pct: -0.3, signal: "Bullish", reason: "Weaker £ means higher GBP gold price", source: "Open Exchange Rates" },
+        { id: 3, name: "Britannia Premium", category: "Direct Price", importance: "Critical", value: 3.8, unit: "%", change_pct: 0.2, signal: "Neutral", reason: "Premium stable near historical avg", source: "Dealer survey" },
+        { id: 4, name: "UK VAT Status", category: "Direct Price", importance: "High", value: 0, unit: "%", change_pct: 0, signal: "Bullish", reason: "Britannias remain VAT-free as legal tender", source: "HMRC" },
+
+        // === MACROECONOMIC ===
+        { id: 5, name: "US Fed Funds Rate", category: "Macroeconomic", importance: "Very High", value: 4.50, unit: "%", change_pct: 0, signal: "Bullish", reason: "Rate cuts expected H2 2026, dovish guidance", source: "FRED" },
+        { id: 6, name: "UK Bank Rate", category: "Macroeconomic", importance: "High", value: 4.25, unit: "%", change_pct: -0.25, signal: "Bullish", reason: "BoE cutting, easing financial conditions", source: "BoE" },
+        { id: 7, name: "US CPI (YoY)", category: "Macroeconomic", importance: "Very High", value: 3.1, unit: "%", change_pct: 0.2, signal: "Bullish", reason: "Inflation sticky, supports gold as hedge", source: "FRED" },
+        { id: 8, name: "UK CPI (YoY)", category: "Macroeconomic", importance: "High", value: 2.8, unit: "%", change_pct: -0.1, signal: "Neutral", reason: "Near target, limited additional impetus", source: "ONS" },
+        { id: 9, name: "US 10Y Treasury Yield", category: "Macroeconomic", importance: "Very High", value: 4.28, unit: "%", change_pct: -0.12, signal: "Bullish", reason: "Yields falling, reduces gold opportunity cost", source: "FRED" },
+        { id: 10, name: "UK 10Y Gilt Yield", category: "Macroeconomic", importance: "High", value: 4.15, unit: "%", change_pct: -0.08, signal: "Bullish", reason: "Falling gilts support GBP gold", source: "BoE" },
+        { id: 11, name: "US Real Yield (10Y TIPS)", category: "Macroeconomic", importance: "Very High", value: 1.85, unit: "%", change_pct: -0.15, signal: "Bullish", reason: "Declining real yields strongly bullish for gold", source: "FRED" },
+        { id: 12, name: "US M2 Money Supply", category: "Macroeconomic", importance: "Medium", value: 21.5, unit: "$T", change_pct: 2.1, signal: "Bullish", reason: "Money supply expansion supports asset prices", source: "FRED" },
+
+        // === SENTIMENT ===
+        { id: 13, name: "VIX (Fear Index)", category: "Sentiment", importance: "High", value: 18.5, unit: "", change_pct: 12.3, signal: "Bullish", reason: "Elevated VIX drives safe-haven demand", source: "Yahoo Finance" },
+        { id: 14, name: "GLD ETF Holdings", category: "Sentiment", importance: "High", value: 878.2, unit: "tonnes", change_pct: 1.5, signal: "Bullish", reason: "Rising ETF holdings = institutional buying", source: "Yahoo Finance" },
+        { id: 15, name: "SGLN (UK Gold ETF)", category: "Sentiment", importance: "Medium", value: 12.4, unit: "£bn AUM", change_pct: 2.3, signal: "Bullish", reason: "UK-specific gold demand rising", source: "iShares" },
+        { id: 16, name: "COMEX Net Longs", category: "Sentiment", importance: "High", value: 245000, unit: "contracts", change_pct: -5.2, signal: "Neutral", reason: "Positioning elevated but not extreme", source: "CFTC COT" },
+        { id: 17, name: "Gold Futures Open Interest", category: "Sentiment", importance: "Medium", value: 525000, unit: "contracts", change_pct: 3.1, signal: "Bullish", reason: "Rising OI with rising price = bullish", source: "CME" },
+
+        // === FX & CURRENCY ===
+        { id: 18, name: "DXY (Dollar Index)", category: "FX & Currency", importance: "Very High", value: 103.2, unit: "", change_pct: -0.8, signal: "Bullish", reason: "Weakening dollar strongly bullish for gold", source: "Yahoo Finance" },
+        { id: 19, name: "EUR/USD", category: "FX & Currency", importance: "Medium", value: 1.0925, unit: "", change_pct: 0.5, signal: "Bullish", reason: "Euro strength = dollar weakness", source: "Open Exchange Rates" },
+        { id: 20, name: "USD/CNY", category: "FX & Currency", importance: "Medium", value: 7.18, unit: "", change_pct: 0.2, signal: "Neutral", reason: "Yuan stable, limited gold impact", source: "Open Exchange Rates" },
+        { id: 21, name: "GBP Trade-Weighted Index", category: "FX & Currency", importance: "Medium", value: 80.5, unit: "", change_pct: -0.4, signal: "Bullish", reason: "Weaker £ increases GBP gold price", source: "BoE" },
+
+        // === COMMODITIES ===
+        { id: 22, name: "Silver Spot (XAG/USD)", category: "Commodities", importance: "High", value: 33.85, unit: "$", change_pct: 2.1, signal: "Bullish", reason: "Silver leading gold, industrial + monetary demand", source: "Metals.live" },
+        { id: 23, name: "Gold/Silver Ratio", category: "Commodities", importance: "Medium", value: 88.2, unit: "", change_pct: -1.0, signal: "Bullish", reason: "Ratio declining = silver catching up, healthy bull run", source: "Calculated" },
+        { id: 24, name: "Brent Crude Oil", category: "Commodities", importance: "Medium", value: 82.45, unit: "$", change_pct: 3.5, signal: "Bullish", reason: "Rising oil = inflation hedge demand for gold", source: "Yahoo Finance" },
+        { id: 25, name: "Copper Price", category: "Commodities", importance: "Low", value: 4.25, unit: "$/lb", change_pct: 1.8, signal: "Neutral", reason: "Copper rising on growth, mixed signal for gold", source: "Yahoo Finance" },
+
+        // === GEOPOLITICAL ===
+        { id: 26, name: "Central Bank Gold Purchases", category: "Geopolitical", importance: "Very High", value: 1037, unit: "tonnes/yr", change_pct: 8.5, signal: "Bullish", reason: "Record CB buying, dedollarisation trend", source: "WGC" },
+        { id: 27, name: "China Gold Imports", category: "Geopolitical", importance: "High", value: 150, unit: "tonnes/mo", change_pct: -3.2, signal: "Neutral", reason: "Imports slightly below recent peaks", source: "WGC" },
+        { id: 28, name: "India Gold Demand", category: "Geopolitical", importance: "High", value: 180, unit: "tonnes/qtr", change_pct: 5.8, signal: "Bullish", reason: "Wedding season + lower import duties", source: "WGC" },
+    ],
+
+    // Historical data for charts (90 days sample)
+    history: {
+        dates: generateDates(90),
+        gold_spot_gbp: generateSeries(2100, 2345, 90, 0.015),
+        gold_spot_usd: generateSeries(2680, 2985, 90, 0.012),
+        britannia_est: generateSeries(2180, 2435, 90, 0.016),
+        fed_rate: generateFlat(4.75, 4.50, 90),
+        uk_rate: generateFlat(4.50, 4.25, 90),
+        us_10y: generateSeries(4.55, 4.28, 90, 0.008),
+        real_yield: generateSeries(2.10, 1.85, 90, 0.006),
+        vix: generateSeries(14, 18.5, 90, 0.04),
+        dxy: generateSeries(106, 103.2, 90, 0.005),
+        gbp_usd: generateSeries(1.26, 1.2725, 90, 0.003),
+        silver: generateSeries(28, 33.85, 90, 0.02),
+        oil: generateSeries(75, 82.45, 90, 0.015),
+        gld_holdings: generateSeries(855, 878, 90, 0.003),
+    }
+};
+
+// Data generation helpers
+function generateDates(n) {
+    const dates = [];
+    const now = new Date();
+    for (let i = n - 1; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(d.getDate() - i);
+        dates.push(d.toISOString().split('T')[0]);
+    }
+    return dates;
+}
+function generateSeries(start, end, n, volatility) {
+    const series = [start];
+    const trend = (end - start) / n;
+    for (let i = 1; i < n; i++) {
+        const prev = series[i - 1];
+        const noise = (Math.random() - 0.5) * 2 * volatility * prev;
+        series.push(Math.round((prev + trend + noise) * 100) / 100);
+    }
+    series[n - 1] = end;
+    return series;
+}
+function generateFlat(start, end, n) {
+    const mid = Math.floor(n * 0.6);
+    const series = [];
+    for (let i = 0; i < n; i++) series.push(i < mid ? start : end);
+    return series;
+}
+
+// ========== CHART COLORS ==========
+const COLORS = ['#f0b90b', '#58a6ff', '#3fb950', '#f85149', '#bc8cff', '#39d2c0', '#f0883e', '#f778ba'];
+const CHART_DEFAULTS = {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+        legend: { labels: { color: '#8b949e', usePointStyle: true, padding: 14, font: { size: 11 } } },
+        tooltip: {
+            backgroundColor: '#1c2333',
+            titleColor: '#e6edf3',
+            bodyColor: '#8b949e',
+            borderColor: '#30363d',
+            borderWidth: 1,
+            padding: 12,
+            cornerRadius: 8,
+        }
+    },
+    scales: {
+        x: { grid: { color: 'rgba(48,54,61,0.3)' }, ticks: { color: '#6e7681', font: { size: 10 } } },
+        y: { grid: { color: 'rgba(48,54,61,0.3)' }, ticks: { color: '#6e7681', font: { size: 10 } } }
+    }
+};
+
+// ========== DASHBOARD CLASS ==========
+class GoldDashboard {
+    constructor(data) {
+        this.data = data;
+        this.charts = {};
+        this.currentTab = 'overview';
+        this.init();
+    }
+
+    init() {
+        this.renderLastUpdated();
+        this.computeSignals();
+        this.renderKPIs();
+        this.renderCharts();
+        this.renderTable();
+        this.renderSources();
+        this.checkAlerts();
+    }
+
+    renderLastUpdated() {
+        const d = new Date(this.data.last_updated);
+        document.getElementById('lastUpdate').textContent = d.toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+    }
+
+    computeSignals() {
+        const vars = this.data.variables;
+        const bullish = vars.filter(v => v.signal === 'Bullish').length;
+        const bearish = vars.filter(v => v.signal === 'Bearish').length;
+        const neutral = vars.filter(v => v.signal === 'Neutral').length;
+        const total = vars.length;
+
+        // Weighted score: Critical=3, Very High=2.5, High=2, Medium=1, Low=0.5
+        const weights = { 'Critical': 3, 'Very High': 2.5, 'High': 2, 'Medium': 1, 'Low': 0.5 };
+        let weightedBull = 0, weightedBear = 0, totalWeight = 0;
+        vars.forEach(v => {
+            const w = weights[v.importance] || 1;
+            totalWeight += w;
+            if (v.signal === 'Bullish') weightedBull += w;
+            if (v.signal === 'Bearish') weightedBear += w;
+        });
+
+        const score = Math.round(((weightedBull - weightedBear) / totalWeight) * 100);
+        const el = document.getElementById('compositeSignal');
+        el.textContent = (score > 0 ? '+' : '') + score;
+        el.className = 'signal-value ' + (score > 20 ? 'bullish' : score < -20 ? 'bearish' : 'neutral');
+        document.getElementById('compositeDetail').textContent = `${bullish} Bullish / ${bearish} Bearish / ${neutral} Neutral of ${total}`;
+
+        // Britannia price
+        document.getElementById('britanniaPrice').textContent = '£' + this.data.britannia_price_gbp.toLocaleString('en-GB', { minimumFractionDigits: 2 });
+        const chg = ((this.data.britannia_price_gbp - this.data.britannia_price_prev) / this.data.britannia_price_prev * 100).toFixed(1);
+        document.getElementById('britanniaChange').innerHTML = `VAT-Free / CGT-Exempt &mdash; <span style="color:${chg >= 0 ? 'var(--positive)' : 'var(--negative)'}">${chg >= 0 ? '+' : ''}${chg}% this period</span>`;
+
+        // 5% move probability (simplified model using VIX + signal concentration)
+        const vix = vars.find(v => v.name.includes('VIX'));
+        const vixVal = vix ? vix.value : 15;
+        const signalConcentration = Math.max(bullish, bearish) / total;
+        const prob = Math.min(95, Math.round(vixVal * 1.5 + signalConcentration * 30 + Math.abs(score) * 0.3));
+        const probEl = document.getElementById('moveProbability');
+        probEl.textContent = prob + '%';
+        probEl.className = 'signal-value ' + (prob > 60 ? 'bullish' : prob > 40 ? 'neutral' : 'neutral');
+        document.getElementById('moveProbDetail').textContent = `VIX: ${vixVal} | Signal concentration: ${(signalConcentration * 100).toFixed(0)}% | Score: ${score}`;
+    }
+
+    renderKPIs() {
+        const container = document.getElementById('kpiRow');
+        const keyVars = this.data.variables.filter(v => ['Critical', 'Very High'].includes(v.importance));
+
+        container.innerHTML = keyVars.map(v => {
+            const chgClass = v.change_pct > 0 ? 'positive' : v.change_pct < 0 ? 'negative' : 'neutral';
+            const chgSign = v.change_pct > 0 ? '+' : '';
+            const signalClass = v.signal === 'Bullish' ? 'bullish' : v.signal === 'Bearish' ? 'bearish' : '';
+            const fmtVal = v.unit === '$' ? '$' + v.value.toLocaleString() : v.unit === '%' ? v.value + '%' : v.unit === '$T' ? '$' + v.value + 'T' : v.unit === 'tonnes/yr' ? v.value.toLocaleString() + ' t/yr' : v.unit === 'contracts' ? (v.value / 1000).toFixed(0) + 'K' : v.value.toLocaleString();
+
+            return `<div class="kpi-card">
+                <div class="kpi-label">${v.name}</div>
+                <div class="kpi-value">${fmtVal}</div>
+                <div class="kpi-change ${chgClass}">${chgSign}${v.change_pct}%</div>
+                <div class="kpi-impact"><span class="${signalClass}">${v.signal}</span> — ${v.reason}</div>
+            </div>`;
+        }).join('');
+    }
+
+    renderCharts() {
+        const D = this.data;
+        const H = D.history;
+        const labels = H.dates;
+
+        // Price chart
+        this.charts.price = new Chart(document.getElementById('priceChart'), {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [
+                    { label: 'Britannia Est. (£)', data: H.britannia_est, borderColor: COLORS[0], backgroundColor: COLORS[0] + '15', fill: true, borderWidth: 2.5, tension: 0.3, pointRadius: 0, pointHoverRadius: 5 },
+                    { label: 'Gold Spot (£)', data: H.gold_spot_gbp, borderColor: COLORS[1], borderWidth: 1.5, tension: 0.3, pointRadius: 0, borderDash: [5, 3] },
+                    { label: 'Gold Spot ($)', data: H.gold_spot_usd, borderColor: COLORS[5], borderWidth: 1.5, tension: 0.3, pointRadius: 0, yAxisID: 'y1' },
+                ]
+            },
+            options: {
+                ...CHART_DEFAULTS,
+                plugins: { ...CHART_DEFAULTS.plugins, legend: { ...CHART_DEFAULTS.plugins.legend, position: 'top' } },
+                scales: {
+                    ...CHART_DEFAULTS.scales,
+                    y: { ...CHART_DEFAULTS.scales.y, title: { display: true, text: 'GBP (£)', color: '#6e7681' }, ticks: { color: '#6e7681', callback: v => '£' + v.toLocaleString() } },
+                    y1: { position: 'right', grid: { display: false }, title: { display: true, text: 'USD ($)', color: '#6e7681' }, ticks: { color: '#6e7681', callback: v => '$' + v.toLocaleString() } }
+                }
+            }
+        });
+
+        // Macro chart
+        this.charts.macro = new Chart(document.getElementById('macroChart'), {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [
+                    { label: 'Fed Rate (%)', data: H.fed_rate, borderColor: COLORS[3], borderWidth: 2, tension: 0, pointRadius: 0, yAxisID: 'y' },
+                    { label: 'UK Rate (%)', data: H.uk_rate, borderColor: COLORS[6], borderWidth: 2, tension: 0, pointRadius: 0, yAxisID: 'y' },
+                    { label: 'US 10Y Yield (%)', data: H.us_10y, borderColor: COLORS[4], borderWidth: 1.5, tension: 0.3, pointRadius: 0, yAxisID: 'y' },
+                    { label: 'Real Yield (%)', data: H.real_yield, borderColor: COLORS[5], borderWidth: 1.5, tension: 0.3, pointRadius: 0, borderDash: [4, 3], yAxisID: 'y' },
+                ]
+            },
+            options: { ...CHART_DEFAULTS, scales: { ...CHART_DEFAULTS.scales, y: { ...CHART_DEFAULTS.scales.y, ticks: { color: '#6e7681', callback: v => v + '%' } } } }
+        });
+
+        // FX chart
+        this.charts.fx = new Chart(document.getElementById('fxChart'), {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [
+                    { label: 'GBP/USD', data: H.gbp_usd, borderColor: COLORS[0], borderWidth: 2, tension: 0.3, pointRadius: 0 },
+                    { label: 'DXY (scaled)', data: H.dxy.map(v => v / 80), borderColor: COLORS[3], borderWidth: 1.5, tension: 0.3, pointRadius: 0, borderDash: [4, 3] },
+                ]
+            },
+            options: { ...CHART_DEFAULTS }
+        });
+
+        // Sentiment chart
+        this.charts.sentiment = new Chart(document.getElementById('sentimentChart'), {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [
+                    { label: 'VIX', data: H.vix, borderColor: COLORS[3], backgroundColor: COLORS[3] + '15', fill: true, borderWidth: 2, tension: 0.3, pointRadius: 0, yAxisID: 'y' },
+                    { label: 'GLD Holdings (tonnes)', data: H.gld_holdings, borderColor: COLORS[0], borderWidth: 2, tension: 0.3, pointRadius: 0, yAxisID: 'y1' },
+                ]
+            },
+            options: {
+                ...CHART_DEFAULTS,
+                scales: {
+                    ...CHART_DEFAULTS.scales,
+                    y: { ...CHART_DEFAULTS.scales.y, title: { display: true, text: 'VIX', color: '#6e7681' } },
+                    y1: { position: 'right', grid: { display: false }, title: { display: true, text: 'Tonnes', color: '#6e7681' }, ticks: { color: '#6e7681' } }
+                }
+            }
+        });
+
+        // Commodities chart
+        this.charts.commodities = new Chart(document.getElementById('commoditiesChart'), {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [
+                    { label: 'Silver ($)', data: H.silver, borderColor: COLORS[1], borderWidth: 2, tension: 0.3, pointRadius: 0, yAxisID: 'y' },
+                    { label: 'Brent Oil ($)', data: H.oil, borderColor: COLORS[6], borderWidth: 1.5, tension: 0.3, pointRadius: 0, yAxisID: 'y1' },
+                ]
+            },
+            options: {
+                ...CHART_DEFAULTS,
+                scales: {
+                    ...CHART_DEFAULTS.scales,
+                    y: { ...CHART_DEFAULTS.scales.y, title: { display: true, text: 'Silver ($)', color: '#6e7681' } },
+                    y1: { position: 'right', grid: { display: false }, title: { display: true, text: 'Oil ($)', color: '#6e7681' }, ticks: { color: '#6e7681' } }
+                }
+            }
+        });
+
+        // Signal bar chart (hidden by default)
+        const signalData = this.data.variables.map(v => v.signal === 'Bullish' ? 1 : v.signal === 'Bearish' ? -1 : 0);
+        const signalColors = this.data.variables.map(v => v.signal === 'Bullish' ? '#3fb950' : v.signal === 'Bearish' ? '#f85149' : '#30363d');
+        this.charts.signal = new Chart(document.getElementById('signalChart'), {
+            type: 'bar',
+            data: {
+                labels: this.data.variables.map(v => v.name.length > 18 ? v.name.slice(0, 16) + '…' : v.name),
+                datasets: [{ label: 'Signal', data: signalData, backgroundColor: signalColors, borderRadius: 3 }]
+            },
+            options: {
+                ...CHART_DEFAULTS,
+                indexAxis: 'y',
+                plugins: { ...CHART_DEFAULTS.plugins, legend: { display: false } },
+                scales: {
+                    x: { ...CHART_DEFAULTS.scales.x, min: -1.5, max: 1.5, ticks: { callback: v => v === 1 ? 'BULL' : v === -1 ? 'BEAR' : '—' } },
+                    y: { ...CHART_DEFAULTS.scales.y, ticks: { color: '#8b949e', font: { size: 10 } } }
+                }
+            }
+        });
+    }
+
+    renderTable() {
+        const catFilter = document.getElementById('filterCategory').value;
+        const impFilter = document.getElementById('filterImportance').value;
+        const sigFilter = document.getElementById('filterSignal').value;
+
+        let vars = this.data.variables;
+        if (catFilter !== 'all') vars = vars.filter(v => v.category === catFilter);
+        if (impFilter !== 'all') vars = vars.filter(v => v.importance === impFilter);
+        if (sigFilter !== 'all') vars = vars.filter(v => v.signal === sigFilter);
+
+        const badgeClass = imp => imp === 'Critical' ? 'badge-critical' : imp === 'Very High' ? 'badge-high' : imp === 'High' ? 'badge-medium' : 'badge-low';
+        const sigClass = sig => sig === 'Bullish' ? 'signal-bullish' : sig === 'Bearish' ? 'signal-bearish' : 'signal-neutral-chip';
+
+        let html = `<table>
+            <thead><tr>
+                <th>#</th><th>Variable</th><th>Category</th><th>Value</th><th>Change</th><th>Importance</th><th>Signal</th><th>Reasoning</th><th>Source</th>
+            </tr></thead><tbody>`;
+
+        vars.forEach(v => {
+            const chgColor = v.change_pct > 0 ? 'var(--positive)' : v.change_pct < 0 ? 'var(--negative)' : 'var(--text-muted)';
+            const fmtVal = v.unit === '$' ? '$' + v.value.toLocaleString() : v.unit === '%' ? v.value + '%' : v.unit === '$T' ? '$' + v.value + 'T' : v.unit === 'tonnes/yr' ? v.value.toLocaleString() + ' t/yr' : v.unit === 'tonnes/mo' ? v.value + ' t/mo' : v.unit === 'tonnes/qtr' ? v.value + ' t/qtr' : v.unit === '£bn AUM' ? '£' + v.value + 'bn' : v.unit === 'contracts' ? (v.value / 1000).toFixed(0) + 'K' : v.unit === '$/lb' ? '$' + v.value + '/lb' : v.value;
+
+            html += `<tr>
+                <td style="color:var(--text-muted)">${v.id}</td>
+                <td style="font-weight:600">${v.name}</td>
+                <td><span style="color:var(--text-secondary)">${v.category}</span></td>
+                <td style="font-weight:600">${fmtVal}</td>
+                <td style="color:${chgColor};font-weight:500">${v.change_pct > 0 ? '+' : ''}${v.change_pct}%</td>
+                <td><span class="badge ${badgeClass(v.importance)}">${v.importance}</span></td>
+                <td><span class="signal-chip ${sigClass(v.signal)}">${v.signal}</span></td>
+                <td style="font-size:12px;color:var(--text-secondary);max-width:220px">${v.reason}</td>
+                <td style="font-size:11px;color:var(--text-muted)">${v.source}</td>
+            </tr>`;
+        });
+
+        html += '</tbody></table>';
+        document.getElementById('variableTable').innerHTML = html;
+    }
+
+    renderSources() {
+        const sources = [
+            { name: 'Metals.live API', status: 'ok', detail: 'Gold/Silver spot — Free, no auth' },
+            { name: 'FRED API', status: 'ok', detail: 'US macro data — Free API key' },
+            { name: 'Open Exchange Rates', status: 'ok', detail: 'FX rates — Free tier (300/mo)' },
+            { name: 'Yahoo Finance (yfinance)', status: 'ok', detail: 'VIX, ETFs, commodities — Free' },
+            { name: 'Bank of England', status: 'ok', detail: 'UK rates & gilts — Free CSV' },
+            { name: 'ONS', status: 'ok', detail: 'UK CPI — Free monthly' },
+            { name: 'CFTC COT Data', status: 'ok', detail: 'Futures positioning — Free weekly' },
+            { name: 'World Gold Council', status: 'warn', detail: 'CB purchases, demand — Quarterly manual' },
+            { name: 'BullionByPost', status: 'warn', detail: 'Britannia premium — Manual/scrape' },
+            { name: 'Royal Mint', status: 'err', detail: 'Britannia price — Manual only' },
+        ];
+
+        document.getElementById('sourceGrid').innerHTML = sources.map(s =>
+            `<div class="source-item">
+                <span class="name">${s.name}</span>
+                <span class="status ${s.status}">${s.status === 'ok' ? '● Connected' : s.status === 'warn' ? '◐ Semi-auto' : '○ Manual'}</span>
+            </div>`
+        ).join('');
+    }
+
+    checkAlerts() {
+        const probEl = document.getElementById('moveProbability');
+        const prob = parseInt(probEl.textContent);
+        const banner = document.getElementById('alertBanner');
+
+        const bullCount = this.data.variables.filter(v => v.signal === 'Bullish').length;
+        const bearCount = this.data.variables.filter(v => v.signal === 'Bearish').length;
+
+        if (prob > 55 || bullCount > 20 || bearCount > 15) {
+            banner.classList.add('active');
+            const isBullish = bullCount > bearCount;
+            if (isBullish) banner.classList.add('bullish');
+            document.getElementById('alertIcon').textContent = isBullish ? '📈' : '📉';
+            document.getElementById('alertText').textContent = isBullish
+                ? `BULLISH ALERT: ${bullCount} of 28 indicators pointing up — elevated probability of 5%+ move`
+                : `BEARISH ALERT: ${bearCount} of 28 indicators pointing down — elevated probability of 5%+ move`;
+            document.getElementById('alertDetail').textContent = `5% move probability: ${prob}% | Consider reviewing your position`;
+        }
+    }
+}
+
+// ========== TAB SWITCHING ==========
+function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const cards = {
+        overview: ['priceChartCard', 'macroChartCard', 'fxChartCard', 'sentimentChartCard', 'commoditiesChartCard'],
+        macro: ['macroChartCard', 'priceChartCard'],
+        sentiment: ['sentimentChartCard', 'priceChartCard'],
+        fx: ['fxChartCard', 'priceChartCard'],
+        commodities: ['commoditiesChartCard', 'priceChartCard'],
+        geopolitical: ['priceChartCard'],
+        signals: ['signalChartCard', 'priceChartCard']
+    };
+
+    const all = ['priceChartCard', 'macroChartCard', 'fxChartCard', 'sentimentChartCard', 'commoditiesChartCard', 'signalChartCard'];
+    all.forEach(id => document.getElementById(id).style.display = 'none');
+    (cards[tab] || cards.overview).forEach(id => document.getElementById(id).style.display = '');
+
+    // Update filter to match tab
+    const catMap = { macro: 'Macroeconomic', sentiment: 'Sentiment', fx: 'FX & Currency', commodities: 'Commodities', geopolitical: 'Geopolitical' };
+    if (catMap[tab]) {
+        document.getElementById('filterCategory').value = catMap[tab];
+    } else {
+        document.getElementById('filterCategory').value = 'all';
+    }
+    dashboard.renderTable();
+}
+
+// ========== INIT ==========
+const dashboard = new GoldDashboard(DASHBOARD_DATA);
+</script>
+</body>
+</html>

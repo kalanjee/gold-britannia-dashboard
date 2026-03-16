@@ -1,0 +1,13 @@
+# Never commit secrets
+config.json
+alert_log.json
+gold_refresh.log
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# OS
+.DS_Store
+Thumbs.db

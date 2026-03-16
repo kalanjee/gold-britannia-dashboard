@@ -1,0 +1,43 @@
+name: Refresh Gold Dashboard
+
+on:
+  # Run every 4 hours
+  schedule:
+    - cron: '0 */4 * * *'
+  # Also allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests yfinance pandas
+
+      - name: Run refresh script
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          OER_API_KEY: ${{ secrets.OER_API_KEY }}
+          GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          GMAIL_RECIPIENT: ${{ secrets.GMAIL_RECIPIENT }}
+        run: python gold_refresh_ci.py
+
+      - name: Commit updated dashboard
+        run: |
+          git config user.name "Gold Dashboard Bot"
+          git config user.email "bot@gold-dashboard"
+          git add gold_britannia_dashboard.html gold_data_cache.json
+          git diff --staged --quiet || git commit -m "Auto-refresh dashboard data — $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
