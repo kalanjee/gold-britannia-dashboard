@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-03-16T20:47:59.860332Z",
-  "gold_spot_usd": 5016.1,
-  "gold_spot_gbp": 3764.01,
+  "last_updated": "2026-03-16T20:53:50.087496Z",
+  "gold_spot_usd": 5014.0,
+  "gold_spot_gbp": 3762.43,
   "gbp_usd": 1.3326,
   "britannia_premium_pct": 3.8,
-  "britannia_price_gbp": 3907.04,
-  "britannia_price_prev": 3828.9,
+  "britannia_price_gbp": 3905.4,
+  "britannia_price_prev": 3907.04,
   "silver_usd": 81.04,
   "variables": [
     {
@@ -13,9 +13,9 @@
       "name": "Gold Spot (XAU/USD)",
       "category": "Direct Price",
       "importance": "Critical",
-      "value": 5016.1001,
+      "value": 5014.0,
       "unit": "$",
-      "change_pct": 0,
+      "change_pct": -0.04,
       "signal": "Neutral",
       "reason": "No significant change",
       "source": "yfinance"
@@ -27,9 +27,9 @@
       "importance": "Critical",
       "value": 1.3326,
       "unit": "",
-      "change_pct": 0,
-      "signal": "Neutral",
-      "reason": "GBP/USD stable",
+      "change_pct": 0.0,
+      "signal": "Bearish",
+      "reason": "Stronger \u00a3 reduces GBP gold price",
       "source": "openexchangerates"
     },
     {
@@ -39,7 +39,7 @@
       "importance": "Critical",
       "value": 3.8,
       "unit": "%",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Using configured premium",
       "source": "Config/Dealer survey"
@@ -63,7 +63,7 @@
       "importance": "Very High",
       "value": 3.64,
       "unit": "%",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Rate cuts expected \u2014 lower yields support gold",
       "source": "FRED"
@@ -75,7 +75,7 @@
       "importance": "High",
       "value": 4.25,
       "unit": "%",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "BoE easing cycle supports gold",
       "source": "BoE"
@@ -87,7 +87,7 @@
       "importance": "Very High",
       "value": 327.46,
       "unit": "%",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Sticky inflation supports gold as hedge",
       "source": "FRED"
@@ -99,7 +99,7 @@
       "importance": "High",
       "value": 2.8,
       "unit": "%",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Near target, limited additional impetus",
       "source": "ONS"
@@ -111,7 +111,7 @@
       "importance": "Very High",
       "value": 4.28,
       "unit": "%",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Yields stable",
       "source": "FRED"
@@ -123,7 +123,7 @@
       "importance": "High",
       "value": 4.15,
       "unit": "%",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Gilt yields stable",
       "source": "BoE"
@@ -135,7 +135,7 @@
       "importance": "Very High",
       "value": 1.92,
       "unit": "%",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Negative/low real yields strongly support gold",
       "source": "FRED"
@@ -147,7 +147,7 @@
       "importance": "Medium",
       "value": 22442.1,
       "unit": "$T",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Money supply expansion supports asset prices",
       "source": "FRED"
@@ -159,7 +159,7 @@
       "importance": "High",
       "value": 23.51,
       "unit": "",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Elevated fear drives safe-haven gold demand",
       "source": "Yahoo Finance"
@@ -171,7 +171,7 @@
       "importance": "High",
       "value": 460.43,
       "unit": "$",
-      "change_pct": 0,
+      "change_pct": -0.0,
       "signal": "Bullish",
       "reason": "ETF demand rising",
       "source": "Yahoo Finance"
@@ -183,7 +183,7 @@
       "importance": "Medium",
       "value": 12.4,
       "unit": "\u00a3bn AUM",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "UK-specific gold demand steady",
       "source": "iShares"
@@ -195,7 +195,7 @@
       "importance": "High",
       "value": 245000,
       "unit": "contracts",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Positioning elevated but not extreme",
       "source": "CFTC COT"
@@ -207,7 +207,7 @@
       "importance": "Medium",
       "value": 525000,
       "unit": "contracts",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Rising OI with rising price = bullish confirmation",
       "source": "CME"
@@ -217,11 +217,11 @@
       "name": "DXY (Dollar Index)",
       "category": "FX & Currency",
       "importance": "Very High",
-      "value": 99.805,
+      "value": 99.81,
       "unit": "",
-      "change_pct": 0,
-      "signal": "Neutral",
-      "reason": "Dollar stable",
+      "change_pct": 0.01,
+      "signal": "Bearish",
+      "reason": "Strengthening dollar weighs on gold",
       "source": "Yahoo Finance"
     },
     {
@@ -231,7 +231,7 @@
       "importance": "Medium",
       "value": 1.1508,
       "unit": "",
-      "change_pct": 0,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
@@ -243,7 +243,7 @@
       "importance": "Medium",
       "value": 6.8962,
       "unit": "",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Yuan stable vs dollar",
       "source": "openexchangerates"
@@ -255,7 +255,7 @@
       "importance": "Medium",
       "value": 80.5,
       "unit": "",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "GBP TWI stable",
       "source": "BoE"
@@ -265,9 +265,9 @@
       "name": "Silver Spot (XAG/USD)",
       "category": "Commodities",
       "importance": "High",
-      "value": 81.035,
+      "value": 81.045,
       "unit": "$",
-      "change_pct": 0,
+      "change_pct": 0.01,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
       "source": "yfinance"
@@ -277,9 +277,9 @@
       "name": "Gold/Silver Ratio",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 61.9004,
+      "value": 61.8669,
       "unit": "",
-      "change_pct": 0,
+      "change_pct": -0.05,
       "signal": "Neutral",
       "reason": "Ratio at 61.9 \u2014 healthy range",
       "source": "Calculated"
@@ -289,9 +289,9 @@
       "name": "Brent Crude Oil",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 100.89,
+      "value": 100.79,
       "unit": "$",
-      "change_pct": 0,
+      "change_pct": -0.1,
       "signal": "Neutral",
       "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
@@ -301,9 +301,9 @@
       "name": "Copper Price",
       "category": "Commodities",
       "importance": "Low",
-      "value": 5.835,
+      "value": 5.8355,
       "unit": "$/lb",
-      "change_pct": 0,
+      "change_pct": 0.01,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -315,7 +315,7 @@
       "importance": "Very High",
       "value": 1037,
       "unit": "tonnes/yr",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Record CB buying supports long-term floor",
       "source": "WGC"
@@ -327,7 +327,7 @@
       "importance": "High",
       "value": 150,
       "unit": "tonnes/mo",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Imports near recent averages",
       "source": "WGC"
@@ -339,7 +339,7 @@
       "importance": "High",
       "value": 180,
       "unit": "tonnes/qtr",
-      "change_pct": 0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Strong seasonal demand",
       "source": "WGC"
@@ -496,7 +496,7 @@
       3877.54,
       3838.82,
       3791.32,
-      3764.76
+      3762.66
     ],
     "gold_spot_usd": [
       4165.2,
@@ -572,7 +572,7 @@
       5167.4,
       5115.8,
       5052.5,
-      5017.1
+      5014.3
     ],
     "britannia_est": [
       3244.27,
@@ -648,7 +648,7 @@
       4024.89,
       3984.69,
       3935.39,
-      3907.82
+      3905.64
     ],
     "fed_rate": [
       3.64,
@@ -1117,7 +1117,7 @@
       85.07,
       84.67,
       80.91,
-      81.04
+      81.01
     ],
     "oil": [
       63.13,
@@ -1193,7 +1193,7 @@
       91.98,
       100.46,
       103.14,
-      100.89
+      100.79
     ],
     "gld_holdings": [
       362.32,
@@ -1288,5 +1288,5 @@
       460.43
     ]
   },
-  "move_probability_5pct": 53
+  "move_probability_5pct": 49
 }
