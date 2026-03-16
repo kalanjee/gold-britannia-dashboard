@@ -204,11 +204,9 @@ def fetch_macro_data(config):
     """Fetch all macroeconomic data from FRED."""
     series = {
         "fed_rate": "FEDFUNDS",
-        "us_cpi": "CPIAUCSL",
         "us_10y": "DGS10",
         "us_real_yield": "DFII10",
         "m2": "M2SL",
-        "us_cpi_yoy": "CPIAUCSL",
     }
 
     results = {}
@@ -217,6 +215,33 @@ def fetch_macro_data(config):
         if val is not None:
             results[name] = val
         log.info(f"  FRED {sid}: {val}")
+
+    # CPI YoY: fetch current and 12-month-ago index levels, calculate % change
+    cpi_current = fetch_fred_series("CPIAUCSL", config, observation_limit=1)
+    cpi_year_ago = fetch_fred_series("CPIAUCSL", config, observation_limit=13)
+    if cpi_current and cpi_year_ago:
+        # fetch_fred_series with limit=13 returns the most recent; we need the 13th
+        # Instead, fetch 13 observations and use the last one
+        key = config.get("fred_api_key", "")
+        if key and not key.startswith("YOUR_"):
+            url = (f"https://api.stlouisfed.org/fred/series/observations"
+                   f"?series_id=CPIAUCSL&api_key={key}&file_type=json"
+                   f"&sort_order=desc&limit=13")
+            data = fetch_json(url)
+            if data and "observations" in data and len(data["observations"]) >= 13:
+                try:
+                    current = float(data["observations"][0]["value"])
+                    year_ago = float(data["observations"][12]["value"])
+                    cpi_yoy = round((current - year_ago) / year_ago * 100, 1)
+                    results["us_cpi_yoy"] = cpi_yoy
+                    log.info(f"  CPI YoY calculated: {cpi_yoy}% (current: {current}, year ago: {year_ago})")
+                except (ValueError, IndexError) as e:
+                    log.warning(f"  CPI YoY calculation failed: {e}")
+                    results["us_cpi_yoy"] = 3.0
+            else:
+                results["us_cpi_yoy"] = 3.0
+    else:
+        results["us_cpi_yoy"] = 3.0
 
     return results
 
@@ -571,9 +596,16 @@ def generate_dashboard_data(config):
         else:
             chart_history["us_10y"] = [us_10y] * n
 
-        # Estimate real yield as 10Y minus latest CPI (rough approximation)
-        cpi_approx = us_cpi if us_cpi else 3.0
-        chart_history["real_yield"] = [round(y - cpi_approx, 2) for y in chart_history["us_10y"]]
+        # Real yield = 10Y nominal yield minus inflation expectation
+        # Note: FRED CPIAUCSL returns the index level (~327), not YoY % (~3%).
+        # Use the FRED real yield value if available, otherwise approximate with 3% inflation.
+        fred_real_yield = macro.get("us_real_yield")
+        if fred_real_yield and fred_real_yield > -10 and fred_real_yield < 10:
+            # Use the spread between 10Y nominal and FRED real yield to estimate inflation
+            inflation_est = us_10y - fred_real_yield if us_10y else 3.0
+        else:
+            inflation_est = 3.0
+        chart_history["real_yield"] = [round(y - inflation_est, 2) for y in chart_history["us_10y"]]
 
         # Fed rate and UK rate change infrequently — use FRED value as flat
         chart_history["fed_rate"] = [fed_rate] * n
