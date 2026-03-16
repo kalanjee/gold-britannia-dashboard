@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-16T21:45:03.153810Z",
+  "last_updated": "2026-03-16T21:51:54.138481Z",
   "gold_spot_usd": 5011.3,
   "gold_spot_gbp": 3762.34,
   "gbp_usd": 1.332,
@@ -87,7 +87,7 @@
       "importance": "Very High",
       "value": 2.4,
       "unit": "%",
-      "change_pct": -99.27,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Inflation near target \u2014 limited additional impetus",
       "source": "FRED"
@@ -217,7 +217,7 @@
       "name": "DXY (Dollar Index)",
       "category": "FX & Currency",
       "importance": "Very High",
-      "value": 99.796,
+      "value": 99.794,
       "unit": "",
       "change_pct": -0.0,
       "signal": "Bullish",
@@ -1116,7 +1116,7 @@
       1.3419,
       1.3382,
       1.3353,
-      1.3321
+      1.3319
     ],
     "silver": [
       52.92,
