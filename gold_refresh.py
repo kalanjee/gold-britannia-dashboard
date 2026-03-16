@@ -268,6 +268,18 @@ def fetch_market_data():
         return {}
 
 
+def _align_series(source_hist, target_dates):
+    """Align a history dict (with dates/values) to a target date list using forward-fill."""
+    lookup = dict(zip(source_hist["dates"], source_hist["values"]))
+    aligned = []
+    last_val = source_hist["values"][0] if source_hist["values"] else 0
+    for d in target_dates:
+        if d in lookup:
+            last_val = lookup[d]
+        aligned.append(last_val)
+    return aligned
+
+
 def fetch_historical(days=90):
     """Fetch 90-day history for chart data."""
     try:
@@ -282,6 +294,8 @@ def fetch_historical(days=90):
             "vix": "^VIX",
             "dxy": "DX-Y.NYB",
             "gld": "GLD",
+            "us_10y": "^TNX",
+            "us_2y": "^IRX",
         }
 
         history = {}
@@ -546,14 +560,40 @@ def generate_dashboard_data(config):
         if hist_key in history:
             chart_history[key] = history[hist_key]["values"]
 
-    # Fill macro history with flat values (FRED doesn't give easy daily history)
+    # Interest rates — use Yahoo Finance historical data where available
     n = len(chart_history["dates"])
     if n > 0:
+        # US 10Y yield from Yahoo Finance (^TNX gives yield * 10, but recent versions give actual %)
+        if "us_10y" in history:
+            us_10y_hist = history["us_10y"]["values"]
+            # ^TNX returns values like 4.28 (percentage), align to our date series
+            chart_history["us_10y"] = _align_series(history["us_10y"], chart_history["dates"])
+        else:
+            chart_history["us_10y"] = [us_10y] * n
+
+        # Estimate real yield as 10Y minus latest CPI (rough approximation)
+        cpi_approx = us_cpi if us_cpi else 3.0
+        chart_history["real_yield"] = [round(y - cpi_approx, 2) for y in chart_history["us_10y"]]
+
+        # Fed rate and UK rate change infrequently — use FRED value as flat
         chart_history["fed_rate"] = [fed_rate] * n
         chart_history["uk_rate"] = [4.25] * n
-        chart_history["us_10y"] = [us_10y] * n if not history else chart_history.get("us_10y", [us_10y] * n)
-        chart_history["real_yield"] = [real_yield] * n
-        chart_history["gbp_usd"] = [gbp_usd] * n
+
+        # GBP/USD — try to get history from yfinance
+        try:
+            import yfinance as yf
+            gbp_ticker = yf.Ticker("GBPUSD=X")
+            gbp_hist = gbp_ticker.history(period=f"{len(chart_history['dates'])+10}d")
+            if not gbp_hist.empty and len(gbp_hist) > 10:
+                chart_history["gbp_usd"] = _align_series(
+                    {"dates": [d.strftime('%Y-%m-%d') for d in gbp_hist.index],
+                     "values": [round(float(v), 4) for v in gbp_hist['Close']]},
+                    chart_history["dates"]
+                )
+            else:
+                chart_history["gbp_usd"] = [gbp_usd] * n
+        except Exception:
+            chart_history["gbp_usd"] = [gbp_usd] * n
 
     # Compile dashboard data
     dashboard_data = {
