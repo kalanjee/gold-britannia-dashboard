@@ -36,6 +36,6 @@ jobs:
         run: |
           git config user.name "Gold Dashboard Bot"
           git config user.email "bot@gold-dashboard"
-          git add gold_britannia_dashboard.html gold_data_cache.json
+          git add data.js gold_data_cache.json
           git diff --staged --quiet || git commit -m "Auto-refresh dashboard data — $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
