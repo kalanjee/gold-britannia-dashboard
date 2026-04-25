@@ -1,21 +1,21 @@
 {
-  "last_updated": "2026-04-25T02:27:44.559553Z",
-  "gold_spot_usd": 4725.4,
-  "gold_spot_gbp": 3491.5,
+  "last_updated": "2026-04-25T05:48:13.070057Z",
+  "gold_spot_usd": 4722.3,
+  "gold_spot_gbp": 3489.21,
   "gbp_usd": 1.3534,
   "britannia_premium_pct": 3.8,
-  "britannia_price_gbp": 3624.18,
-  "britannia_price_prev": 3622.54,
-  "silver_usd": 75.68,
+  "britannia_price_gbp": 3621.8,
+  "britannia_price_prev": 3624.18,
+  "silver_usd": 76.38,
   "variables": [
     {
       "id": 1,
       "name": "Gold Spot (XAU/USD)",
       "category": "Direct Price",
       "importance": "Critical",
-      "value": 4725.3999,
+      "value": 4722.2998,
       "unit": "$",
-      "change_pct": 0.06,
+      "change_pct": -0.07,
       "signal": "Neutral",
       "reason": "No significant change",
       "source": "yfinance"
@@ -27,9 +27,9 @@
       "importance": "Critical",
       "value": 1.3534,
       "unit": "",
-      "change_pct": 0.01,
-      "signal": "Bearish",
-      "reason": "Stronger \u00a3 reduces GBP gold price",
+      "change_pct": -0.0,
+      "signal": "Bullish",
+      "reason": "Weaker \u00a3 increases GBP gold price",
       "source": "openexchangerates"
     },
     {
@@ -219,9 +219,9 @@
       "importance": "Very High",
       "value": 98.51,
       "unit": "",
-      "change_pct": -0.01,
-      "signal": "Bullish",
-      "reason": "Weakening dollar supports gold priced in USD",
+      "change_pct": 0.0,
+      "signal": "Bearish",
+      "reason": "Strengthening dollar weighs on gold",
       "source": "Yahoo Finance"
     },
     {
@@ -231,7 +231,7 @@
       "importance": "Medium",
       "value": 1.1722,
       "unit": "",
-      "change_pct": 0.03,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
@@ -265,9 +265,9 @@
       "name": "Silver Spot (XAG/USD)",
       "category": "Commodities",
       "importance": "High",
-      "value": 75.685,
+      "value": 76.383,
       "unit": "$",
-      "change_pct": -0.2,
+      "change_pct": 0.92,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
       "source": "yfinance"
@@ -277,11 +277,11 @@
       "name": "Gold/Silver Ratio",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 62.4351,
+      "value": 61.824,
       "unit": "",
-      "change_pct": 0.25,
+      "change_pct": -0.98,
       "signal": "Neutral",
-      "reason": "Ratio at 62.4 \u2014 healthy range",
+      "reason": "Ratio at 61.8 \u2014 healthy range",
       "source": "Calculated"
     },
     {
@@ -289,11 +289,11 @@
       "name": "Brent Crude Oil",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 99.78,
+      "value": 105.33,
       "unit": "$",
-      "change_pct": -0.31,
-      "signal": "Neutral",
-      "reason": "Oil stable \u2014 limited impact",
+      "change_pct": 5.56,
+      "signal": "Bullish",
+      "reason": "Rising energy prices stoke inflation expectations",
       "source": "Yahoo Finance"
     },
     {
@@ -301,9 +301,9 @@
       "name": "Copper Price",
       "category": "Commodities",
       "importance": "Low",
-      "value": 6.0285,
+      "value": 6.0235,
       "unit": "$/lb",
-      "change_pct": -0.02,
+      "change_pct": -0.08,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -498,7 +498,7 @@
       3471.55,
       3496.75,
       3476.5,
-      3491.5
+      3489.21
     ],
     "gold_spot_usd": [
       4449.3,
@@ -575,7 +575,7 @@
       4698.4,
       4732.5,
       4705.1,
-      4725.4
+      4722.3
     ],
     "britannia_est": [
       3412.42,
@@ -652,7 +652,7 @@
       3603.47,
       3629.63,
       3608.61,
-      3624.18
+      3621.8
     ],
     "fed_rate": [
       3.64,
@@ -1201,7 +1201,7 @@
       1.3531,
       1.351,
       1.35,
-      1.3532
+      1.3466
     ],
     "silver": [
       77.14,
@@ -1278,7 +1278,7 @@
       76.41,
       77.89,
       75.46,
-      75.68
+      76.38
     ],
     "oil": [
       59.96,
@@ -1355,7 +1355,7 @@
       98.48,
       101.91,
       105.07,
-      99.78
+      105.33
     ],
     "gld_holdings": [
       395.8,
@@ -1450,5 +1450,5 @@
       433.25
     ]
   },
-  "move_probability_5pct": 47
+  "move_probability_5pct": 50
 }
