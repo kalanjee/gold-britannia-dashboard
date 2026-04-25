@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-04-25T05:48:13.070057Z",
+  "last_updated": "2026-04-25T08:53:02.930912Z",
   "gold_spot_usd": 4722.3,
   "gold_spot_gbp": 3489.21,
   "gbp_usd": 1.3534,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3621.8,
-  "britannia_price_prev": 3624.18,
+  "britannia_price_prev": 3621.8,
   "silver_usd": 76.38,
   "variables": [
     {
@@ -15,7 +15,7 @@
       "importance": "Critical",
       "value": 4722.2998,
       "unit": "$",
-      "change_pct": -0.07,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "No significant change",
       "source": "yfinance"
@@ -267,7 +267,7 @@
       "importance": "High",
       "value": 76.383,
       "unit": "$",
-      "change_pct": 0.92,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
       "source": "yfinance"
@@ -279,7 +279,7 @@
       "importance": "Medium",
       "value": 61.824,
       "unit": "",
-      "change_pct": -0.98,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Ratio at 61.8 \u2014 healthy range",
       "source": "Calculated"
@@ -291,9 +291,9 @@
       "importance": "Medium",
       "value": 105.33,
       "unit": "$",
-      "change_pct": 5.56,
-      "signal": "Bullish",
-      "reason": "Rising energy prices stoke inflation expectations",
+      "change_pct": 0.0,
+      "signal": "Neutral",
+      "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
     },
     {
@@ -303,7 +303,7 @@
       "importance": "Low",
       "value": 6.0235,
       "unit": "$/lb",
-      "change_pct": -0.08,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -1450,5 +1450,5 @@
       433.25
     ]
   },
-  "move_probability_5pct": 50
+  "move_probability_5pct": 48
 }
