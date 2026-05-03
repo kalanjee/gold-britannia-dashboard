@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-05-03T09:21:57.085509Z",
+  "last_updated": "2026-05-03T13:09:56.678112Z",
   "gold_spot_usd": 4629.9,
   "gold_spot_gbp": 3403.71,
   "gbp_usd": 1.3602,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3533.05,
-  "britannia_price_prev": 3539.43,
+  "britannia_price_prev": 3533.05,
   "silver_usd": 75.95,
   "variables": [
     {
@@ -27,7 +27,7 @@
       "importance": "Critical",
       "value": 1.3602,
       "unit": "",
-      "change_pct": 0.18,
+      "change_pct": 0.0,
       "signal": "Bearish",
       "reason": "Stronger \u00a3 reduces GBP gold price",
       "source": "openexchangerates"
@@ -229,9 +229,9 @@
       "name": "EUR/USD",
       "category": "FX & Currency",
       "importance": "Medium",
-      "value": 1.1728,
+      "value": 1.1732,
       "unit": "",
-      "change_pct": 0.0,
+      "change_pct": 0.03,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
