@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-05-30T17:04:11.171068Z",
+  "last_updated": "2026-05-30T20:56:56.447682Z",
   "gold_spot_usd": 4560.5,
   "gold_spot_gbp": 3390.08,
   "gbp_usd": 1.3453,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3518.9,
-  "britannia_price_prev": 3517.72,
+  "britannia_price_prev": 3518.9,
   "silver_usd": 75.62,
   "variables": [
     {
@@ -27,7 +27,7 @@
       "importance": "Critical",
       "value": 1.3453,
       "unit": "",
-      "change_pct": -0.03,
+      "change_pct": -0.0,
       "signal": "Bullish",
       "reason": "Weaker \u00a3 increases GBP gold price",
       "source": "openexchangerates"
@@ -87,7 +87,7 @@
       "importance": "Very High",
       "value": 3.0,
       "unit": "%",
-      "change_pct": -21.05,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Sticky inflation supports gold as hedge",
       "source": "FRED"
@@ -135,7 +135,7 @@
       "importance": "Very High",
       "value": 1.9,
       "unit": "%",
-      "change_pct": -7.77,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Negative/low real yields strongly support gold",
       "source": "FRED"
@@ -147,7 +147,7 @@
       "importance": "Medium",
       "value": 21.5,
       "unit": "$T",
-      "change_pct": -99.91,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Money supply expansion supports asset prices",
       "source": "FRED"
