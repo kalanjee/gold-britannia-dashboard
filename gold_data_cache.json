@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-06-06T06:52:17.999057Z",
+  "last_updated": "2026-06-06T10:03:18.686918Z",
   "gold_spot_usd": 4337.1,
   "gold_spot_gbp": 3250.47,
   "gbp_usd": 1.3343,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3373.99,
-  "britannia_price_prev": 3387.06,
+  "britannia_price_prev": 3373.99,
   "silver_usd": 68.94,
   "variables": [
     {
@@ -15,7 +15,7 @@
       "importance": "Critical",
       "value": 4337.1001,
       "unit": "$",
-      "change_pct": -0.39,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "No significant change",
       "source": "yfinance"
@@ -229,9 +229,9 @@
       "name": "EUR/USD",
       "category": "FX & Currency",
       "importance": "Medium",
-      "value": 1.1523,
+      "value": 1.1525,
       "unit": "",
-      "change_pct": -0.0,
+      "change_pct": 0.01,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
@@ -267,7 +267,7 @@
       "importance": "High",
       "value": 68.943,
       "unit": "$",
-      "change_pct": 1.39,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
       "source": "yfinance"
@@ -279,7 +279,7 @@
       "importance": "Medium",
       "value": 62.9085,
       "unit": "",
-      "change_pct": -1.76,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Ratio at 62.9 \u2014 healthy range",
       "source": "Calculated"
@@ -291,7 +291,7 @@
       "importance": "Medium",
       "value": 93.09,
       "unit": "$",
-      "change_pct": 0.24,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
@@ -303,7 +303,7 @@
       "importance": "Low",
       "value": 6.2635,
       "unit": "$/lb",
-      "change_pct": -0.19,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
