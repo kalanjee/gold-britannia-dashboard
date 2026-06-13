@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-06-13T10:28:16.346411Z",
+  "last_updated": "2026-06-13T13:59:17.469285Z",
   "gold_spot_usd": 4215.0,
   "gold_spot_gbp": 3143.41,
   "gbp_usd": 1.3409,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3262.86,
-  "britannia_price_prev": 3262.74,
+  "britannia_price_prev": 3262.86,
   "silver_usd": 67.86,
   "variables": [
     {
