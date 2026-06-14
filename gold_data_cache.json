@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-06-14T14:01:44.929186Z",
+  "last_updated": "2026-06-14T17:20:30.752845Z",
   "gold_spot_usd": 4215.0,
   "gold_spot_gbp": 3153.64,
   "gbp_usd": 1.3365,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3273.48,
-  "britannia_price_prev": 3263.22,
+  "britannia_price_prev": 3273.48,
   "silver_usd": 67.86,
   "variables": [
     {
@@ -27,9 +27,9 @@
       "importance": "Critical",
       "value": 1.3365,
       "unit": "",
-      "change_pct": -0.32,
-      "signal": "Bullish",
-      "reason": "Weaker \u00a3 increases GBP gold price",
+      "change_pct": 0.0,
+      "signal": "Bearish",
+      "reason": "Stronger \u00a3 reduces GBP gold price",
       "source": "openexchangerates"
     },
     {
@@ -1441,5 +1441,5 @@
       386.54
     ]
   },
-  "move_probability_5pct": 42
+  "move_probability_5pct": 38
 }
