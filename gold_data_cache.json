@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-27T21:03:13.457065Z",
+  "last_updated": "2026-06-28T03:47:02.244412Z",
   "gold_spot_usd": 4078.7,
   "gold_spot_gbp": 3089.69,
   "gbp_usd": 1.3201,
@@ -169,7 +169,7 @@
       "name": "GLD ETF Holdings",
       "category": "Sentiment",
       "importance": "High",
-      "value": 373.63,
+      "value": NaN,
       "unit": "$",
       "change_pct": NaN,
       "signal": "Bullish",
@@ -217,11 +217,11 @@
       "name": "DXY (Dollar Index)",
       "category": "FX & Currency",
       "importance": "Very High",
-      "value": 101.36,
+      "value": 101.366,
       "unit": "",
-      "change_pct": -0.01,
-      "signal": "Bullish",
-      "reason": "Weakening dollar supports gold priced in USD",
+      "change_pct": 0.01,
+      "signal": "Bearish",
+      "reason": "Strengthening dollar weighs on gold",
       "source": "Yahoo Finance"
     },
     {
@@ -1049,8 +1049,7 @@
       17.28,
       19.49,
       18.63,
-      18.89,
-      18.41
+      18.89
     ],
     "dxy": [
       99.23,
@@ -1126,8 +1125,7 @@
       101.02,
       101.41,
       101.61,
-      101.43,
-      101.36
+      101.43
     ],
     "gbp_usd": [
       1.3419,
@@ -1450,8 +1448,8 @@
       377.32,
       365.92,
       369.46,
-      373.63
+      NaN
     ]
   },
-  "move_probability_5pct": 43
+  "move_probability_5pct": 40
 }
