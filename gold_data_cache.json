@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-07-12T06:32:11.901786Z",
+  "last_updated": "2026-07-12T09:49:55.824642Z",
   "gold_spot_usd": 4104.1,
   "gold_spot_gbp": 3062.42,
   "gbp_usd": 1.3402,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3178.79,
-  "britannia_price_prev": 3178.44,
+  "britannia_price_prev": 3178.79,
   "silver_usd": 59.81,
   "variables": [
     {
@@ -15,7 +15,7 @@
       "importance": "Critical",
       "value": 4104.1,
       "unit": "$",
-      "change_pct": -0.0,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "No significant change",
       "source": "\u2014"
@@ -27,7 +27,7 @@
       "importance": "Critical",
       "value": 1.3402,
       "unit": "",
-      "change_pct": -0.01,
+      "change_pct": -0.0,
       "signal": "Bullish",
       "reason": "Weaker \u00a3 increases GBP gold price",
       "source": "openexchangerates"
@@ -219,9 +219,9 @@
       "importance": "Very High",
       "value": 104,
       "unit": "",
-      "change_pct": 3.0,
-      "signal": "Bearish",
-      "reason": "Strengthening dollar weighs on gold",
+      "change_pct": 0.0,
+      "signal": "Neutral",
+      "reason": "Dollar stable",
       "source": "Yahoo Finance"
     },
     {
@@ -291,9 +291,9 @@
       "importance": "Medium",
       "value": 80,
       "unit": "$",
-      "change_pct": 5.25,
-      "signal": "Bullish",
-      "reason": "Rising energy prices stoke inflation expectations",
+      "change_pct": 0.0,
+      "signal": "Neutral",
+      "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
     },
     {
@@ -303,7 +303,7 @@
       "importance": "Low",
       "value": 4.2,
       "unit": "$/lb",
-      "change_pct": -32.62,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -496,7 +496,7 @@
       3093.16,
       3037.64,
       3082.19,
-      3069.58
+      3062.42
     ],
     "gold_spot_usd": [
       4549.8,
@@ -572,7 +572,7 @@
       4145.3,
       4070.9,
       4130.6,
-      4113.7
+      4104.1
     ],
     "britannia_est": [
       3524.0,
@@ -648,7 +648,7 @@
       3210.7,
       3153.08,
       3199.32,
-      3186.23
+      3178.79
     ],
     "fed_rate": [
       3.63,
@@ -872,7 +872,7 @@
       4.42,
       4.47,
       4.49,
-      4.49,
+      4.48,
       4.53,
       4.57,
       4.54,
@@ -948,7 +948,7 @@
       2.19,
       2.24,
       2.26,
-      2.26,
+      2.25,
       2.3,
       2.34,
       2.31,
