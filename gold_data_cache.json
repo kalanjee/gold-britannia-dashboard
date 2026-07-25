@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-25T16:56:18.989372Z",
+  "last_updated": "2026-07-25T20:51:53.294922Z",
   "gold_spot_usd": 4067.6,
   "gold_spot_gbp": 3053.87,
   "gbp_usd": 1.3319,
@@ -171,7 +171,7 @@
       "importance": "High",
       "value": 371.9,
       "unit": "$",
-      "change_pct": NaN,
+      "change_pct": -0.0,
       "signal": "Bullish",
       "reason": "ETF demand rising",
       "source": "Yahoo Finance"
@@ -1203,7 +1203,7 @@
       1.3432,
       1.3379,
       1.3375,
-      1.3319
+      1.3313
     ],
     "silver": [
       75.22,
