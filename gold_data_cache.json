@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-26T09:57:41.983629Z",
+  "last_updated": "2026-07-26T13:20:10.695801Z",
   "gold_spot_usd": 4067.6,
   "gold_spot_gbp": 3053.87,
   "gbp_usd": 1.3319,
@@ -169,7 +169,7 @@
       "name": "GLD ETF Holdings",
       "category": "Sentiment",
       "importance": "High",
-      "value": 371.9,
+      "value": NaN,
       "unit": "$",
       "change_pct": NaN,
       "signal": "Bullish",
@@ -231,7 +231,7 @@
       "importance": "Medium",
       "value": 1.1374,
       "unit": "",
-      "change_pct": -0.02,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
@@ -876,7 +876,7 @@
       4.63,
       4.66,
       4.7,
-      4.68
+      4.7
     ],
     "real_yield": [
       2.01,
@@ -952,7 +952,7 @@
       2.35,
       2.38,
       2.42,
-      2.4
+      2.42
     ],
     "vix": [
       26.15,
@@ -1040,8 +1040,7 @@
       18.65,
       17.05,
       16.64,
-      18.7,
-      18.58
+      18.7
     ],
     "dxy": [
       98.82,
@@ -1116,8 +1115,7 @@
       100.99,
       101.18,
       101.14,
-      101.43,
-      101.47
+      101.43
     ],
     "gbp_usd": [
       1.3394,
@@ -1437,7 +1435,7 @@
       374.81,
       379.12,
       371.52,
-      371.9
+      NaN
     ]
   },
   "move_probability_5pct": 41
