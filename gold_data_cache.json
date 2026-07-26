@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-26T02:43:24.746913Z",
+  "last_updated": "2026-07-26T06:35:54.254066Z",
   "gold_spot_usd": 4067.6,
   "gold_spot_gbp": 3053.87,
   "gbp_usd": 1.3319,
@@ -13,12 +13,12 @@
       "name": "Gold Spot (XAU/USD)",
       "category": "Direct Price",
       "importance": "Critical",
-      "value": 4067.6001,
+      "value": 4067.6,
       "unit": "$",
       "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "No significant change",
-      "source": "yfinance"
+      "source": "\u2014"
     },
     {
       "id": 2,
@@ -217,11 +217,11 @@
       "name": "DXY (Dollar Index)",
       "category": "FX & Currency",
       "importance": "Very High",
-      "value": 101.465,
+      "value": 104,
       "unit": "",
-      "change_pct": -0.0,
-      "signal": "Bullish",
-      "reason": "Weakening dollar supports gold priced in USD",
+      "change_pct": 2.5,
+      "signal": "Bearish",
+      "reason": "Strengthening dollar weighs on gold",
       "source": "Yahoo Finance"
     },
     {
@@ -265,21 +265,21 @@
       "name": "Silver Spot (XAG/USD)",
       "category": "Commodities",
       "importance": "High",
-      "value": 58.656,
+      "value": 58.66,
       "unit": "$",
-      "change_pct": -0.0,
+      "change_pct": 0.01,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
-      "source": "yfinance"
+      "source": "\u2014"
     },
     {
       "id": 23,
       "name": "Gold/Silver Ratio",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 69.3467,
+      "value": 69.342,
       "unit": "",
-      "change_pct": 0.0,
+      "change_pct": -0.01,
       "signal": "Neutral",
       "reason": "Ratio at 69.3 \u2014 healthy range",
       "source": "Calculated"
@@ -289,9 +289,9 @@
       "name": "Brent Crude Oil",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 96.78,
+      "value": 80,
       "unit": "$",
-      "change_pct": -0.0,
+      "change_pct": -17.34,
       "signal": "Neutral",
       "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
@@ -301,9 +301,9 @@
       "name": "Copper Price",
       "category": "Commodities",
       "importance": "Low",
-      "value": 6.32,
+      "value": 4.2,
       "unit": "$/lb",
-      "change_pct": 0.0,
+      "change_pct": -33.54,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -347,7 +347,6 @@
   ],
   "history": {
     "dates": [
-      "2026-04-08",
       "2026-04-09",
       "2026-04-10",
       "2026-04-13",
@@ -424,7 +423,6 @@
       "2026-07-24"
     ],
     "gold_spot_gbp": [
-      3565.82,
       3597.88,
       3575.13,
       3560.49,
@@ -498,10 +496,9 @@
       3056.5,
       3113.41,
       3038.1,
-      3053.87
+      3056.27
     ],
     "gold_spot_usd": [
-      4749.5,
       4792.2,
       4761.9,
       4742.4,
@@ -575,10 +572,9 @@
       4071.1,
       4146.9,
       4046.6,
-      4067.6
+      4070.8
     ],
     "britannia_est": [
-      3701.33,
       3734.6,
       3710.99,
       3695.79,
@@ -652,10 +648,9 @@
       3172.64,
       3231.71,
       3153.55,
-      3169.92
+      3172.41
     ],
     "fed_rate": [
-      3.63,
       3.63,
       3.63,
       3.63,
@@ -805,11 +800,9 @@
       4.25,
       4.25,
       4.25,
-      4.25,
       4.25
     ],
     "us_10y": [
-      4.29,
       4.29,
       4.32,
       4.3,
@@ -886,7 +879,6 @@
       4.7
     ],
     "real_yield": [
-      2.01,
       2.01,
       2.04,
       2.02,
@@ -1051,7 +1043,6 @@
       18.7
     ],
     "dxy": [
-      99.13,
       98.82,
       98.65,
       98.37,
@@ -1127,7 +1118,6 @@
       101.43
     ],
     "gbp_usd": [
-      1.3402,
       1.3394,
       1.343,
       1.3394,
@@ -1204,7 +1194,6 @@
       1.3313
     ],
     "silver": [
-      75.22,
       76.28,
       76.32,
       75.52,
@@ -1278,10 +1267,9 @@
       58.83,
       60.02,
       57.8,
-      58.66
+      58.91
     ],
     "oil": [
-      94.75,
       95.92,
       95.2,
       99.36,
@@ -1450,5 +1438,5 @@
       NaN
     ]
   },
-  "move_probability_5pct": 44
+  "move_probability_5pct": 40
 }
