@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-08T20:28:17.896339Z",
+  "last_updated": "2026-08-09T01:41:08.240270Z",
   "gold_spot_usd": 4340.7,
   "gold_spot_gbp": 3217.48,
   "gbp_usd": 1.3491,
@@ -229,9 +229,9 @@
       "name": "EUR/USD",
       "category": "FX & Currency",
       "importance": "Medium",
-      "value": 1.156,
+      "value": 1.1559,
       "unit": "",
-      "change_pct": -0.0,
+      "change_pct": -0.01,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
