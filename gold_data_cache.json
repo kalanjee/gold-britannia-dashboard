@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-15T12:34:43.846615Z",
+  "last_updated": "2026-08-15T16:22:16.899325Z",
   "gold_spot_usd": 4380.4,
   "gold_spot_gbp": 3237.79,
   "gbp_usd": 1.3529,
@@ -231,7 +231,7 @@
       "importance": "Medium",
       "value": 1.1569,
       "unit": "",
-      "change_pct": -0.01,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
