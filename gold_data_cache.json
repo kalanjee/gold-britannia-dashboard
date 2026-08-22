@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-08-22T04:31:16.356798Z",
+  "last_updated": "2026-08-22T08:27:59.992784Z",
   "gold_spot_usd": 4624.1,
   "gold_spot_gbp": 3389.85,
   "gbp_usd": 1.3641,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3518.67,
-  "britannia_price_prev": 3547.2,
+  "britannia_price_prev": 3518.67,
   "silver_usd": 69.47,
   "variables": [
     {
@@ -15,7 +15,7 @@
       "importance": "Critical",
       "value": 4624.1001,
       "unit": "$",
-      "change_pct": -0.8,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "No significant change",
       "source": "yfinance"
@@ -219,9 +219,9 @@
       "importance": "Very High",
       "value": 98.8,
       "unit": "",
-      "change_pct": -0.04,
-      "signal": "Bullish",
-      "reason": "Weakening dollar supports gold priced in USD",
+      "change_pct": 0.0,
+      "signal": "Bearish",
+      "reason": "Strengthening dollar weighs on gold",
       "source": "Yahoo Finance"
     },
     {
@@ -267,7 +267,7 @@
       "importance": "High",
       "value": 69.466,
       "unit": "$",
-      "change_pct": 0.66,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
       "source": "yfinance"
@@ -279,7 +279,7 @@
       "importance": "Medium",
       "value": 66.5664,
       "unit": "",
-      "change_pct": -1.46,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Ratio at 66.6 \u2014 healthy range",
       "source": "Calculated"
@@ -291,7 +291,7 @@
       "importance": "Medium",
       "value": 94.39,
       "unit": "$",
-      "change_pct": 0.55,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
@@ -303,7 +303,7 @@
       "importance": "Low",
       "value": 6.5795,
       "unit": "$/lb",
-      "change_pct": -0.01,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -1453,5 +1453,5 @@
       423.36
     ]
   },
-  "move_probability_5pct": 37
+  "move_probability_5pct": 34
 }
