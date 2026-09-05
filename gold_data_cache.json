@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-09-04T22:08:27.850760Z",
+  "last_updated": "2026-09-05T03:08:20.546241Z",
   "gold_spot_usd": 4477.2,
   "gold_spot_gbp": 3312.27,
   "gbp_usd": 1.3517,
   "britannia_premium_pct": 3.8,
   "britannia_price_gbp": 3438.14,
-  "britannia_price_prev": 3433.45,
+  "britannia_price_prev": 3438.14,
   "silver_usd": 66.82,
   "variables": [
     {
@@ -15,7 +15,7 @@
       "importance": "Critical",
       "value": 4477.2002,
       "unit": "$",
-      "change_pct": 0.16,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "No significant change",
       "source": "yfinance"
@@ -27,7 +27,7 @@
       "importance": "Critical",
       "value": 1.3517,
       "unit": "",
-      "change_pct": 0.02,
+      "change_pct": 0.0,
       "signal": "Bearish",
       "reason": "Stronger \u00a3 reduces GBP gold price",
       "source": "openexchangerates"
@@ -111,9 +111,9 @@
       "importance": "Very High",
       "value": 4.77,
       "unit": "%",
-      "change_pct": -0.42,
-      "signal": "Bullish",
-      "reason": "Yields falling \u2014 reduces gold's opportunity cost",
+      "change_pct": 0.0,
+      "signal": "Neutral",
+      "reason": "Yields stable",
       "source": "FRED"
     },
     {
@@ -135,7 +135,7 @@
       "importance": "Very High",
       "value": 2.42,
       "unit": "%",
-      "change_pct": -1.22,
+      "change_pct": 0.0,
       "signal": "Bearish",
       "reason": "High real yields reduce gold appeal",
       "source": "FRED"
@@ -159,7 +159,7 @@
       "importance": "High",
       "value": 14.53,
       "unit": "",
-      "change_pct": 3.71,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Low volatility \u2014 limited fear premium",
       "source": "Yahoo Finance"
@@ -171,7 +171,7 @@
       "importance": "High",
       "value": 406.77,
       "unit": "$",
-      "change_pct": 0.27,
+      "change_pct": -0.0,
       "signal": "Bullish",
       "reason": "ETF demand rising",
       "source": "Yahoo Finance"
@@ -219,7 +219,7 @@
       "importance": "Very High",
       "value": 99.157,
       "unit": "",
-      "change_pct": -0.02,
+      "change_pct": -0.0,
       "signal": "Bullish",
       "reason": "Weakening dollar supports gold priced in USD",
       "source": "Yahoo Finance"
@@ -231,7 +231,7 @@
       "importance": "Medium",
       "value": 1.1615,
       "unit": "",
-      "change_pct": 0.02,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
@@ -243,7 +243,7 @@
       "importance": "Medium",
       "value": 6.711,
       "unit": "",
-      "change_pct": -0.03,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Yuan stable vs dollar",
       "source": "openexchangerates"
@@ -267,7 +267,7 @@
       "importance": "High",
       "value": 66.82,
       "unit": "$",
-      "change_pct": 0.37,
+      "change_pct": -0.0,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
       "source": "yfinance"
@@ -279,7 +279,7 @@
       "importance": "Medium",
       "value": 67.0039,
       "unit": "",
-      "change_pct": -0.21,
+      "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "Ratio at 67.0 \u2014 healthy range",
       "source": "Calculated"
@@ -291,7 +291,7 @@
       "importance": "Medium",
       "value": 95.83,
       "unit": "$",
-      "change_pct": -0.6,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
@@ -303,7 +303,7 @@
       "importance": "Low",
       "value": 6.668,
       "unit": "$/lb",
-      "change_pct": 0.23,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -1453,5 +1453,5 @@
       406.77
     ]
   },
-  "move_probability_5pct": 39
+  "move_probability_5pct": 37
 }
