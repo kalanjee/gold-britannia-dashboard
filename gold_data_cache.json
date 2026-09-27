@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-27T03:53:38.428585Z",
+  "last_updated": "2026-09-27T09:50:48.497787Z",
   "gold_spot_usd": 4321.2,
   "gold_spot_gbp": 3261.16,
   "gbp_usd": 1.325,
@@ -13,12 +13,12 @@
       "name": "Gold Spot (XAU/USD)",
       "category": "Direct Price",
       "importance": "Critical",
-      "value": 4321.2002,
+      "value": 4321.2,
       "unit": "$",
       "change_pct": -0.0,
       "signal": "Neutral",
       "reason": "No significant change",
-      "source": "yfinance"
+      "source": "\u2014"
     },
     {
       "id": 2,
@@ -217,9 +217,9 @@
       "name": "DXY (Dollar Index)",
       "category": "FX & Currency",
       "importance": "Very High",
-      "value": 100.97,
+      "value": 104,
       "unit": "",
-      "change_pct": 0.0,
+      "change_pct": 3.0,
       "signal": "Bearish",
       "reason": "Strengthening dollar weighs on gold",
       "source": "Yahoo Finance"
@@ -265,21 +265,21 @@
       "name": "Silver Spot (XAG/USD)",
       "category": "Commodities",
       "importance": "High",
-      "value": 64.245,
+      "value": 64.25,
       "unit": "$",
-      "change_pct": 0.0,
+      "change_pct": 0.01,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
-      "source": "yfinance"
+      "source": "\u2014"
     },
     {
       "id": 23,
       "name": "Gold/Silver Ratio",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 67.2613,
+      "value": 67.256,
       "unit": "",
-      "change_pct": -0.0,
+      "change_pct": -0.01,
       "signal": "Neutral",
       "reason": "Ratio at 67.3 \u2014 healthy range",
       "source": "Calculated"
@@ -289,9 +289,9 @@
       "name": "Brent Crude Oil",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 104.32,
+      "value": 80,
       "unit": "$",
-      "change_pct": -0.0,
+      "change_pct": -23.31,
       "signal": "Neutral",
       "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
@@ -301,9 +301,9 @@
       "name": "Copper Price",
       "category": "Commodities",
       "importance": "Low",
-      "value": 6.6955,
+      "value": 4.2,
       "unit": "$/lb",
-      "change_pct": -0.0,
+      "change_pct": -37.27,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -347,7 +347,6 @@
   ],
   "history": {
     "dates": [
-      "2026-06-10",
       "2026-06-11",
       "2026-06-12",
       "2026-06-15",
@@ -424,7 +423,6 @@
       "2026-09-25"
     ],
     "gold_spot_gbp": [
-      3119.36,
       3104.79,
       3198.98,
       3284.1,
@@ -501,7 +499,6 @@
       3261.16
     ],
     "gold_spot_usd": [
-      4133.3,
       4114.0,
       4238.8,
       4351.6,
@@ -578,7 +575,6 @@
       4321.2
     ],
     "britannia_est": [
-      3237.89,
       3222.77,
       3320.54,
       3408.9,
@@ -728,7 +724,6 @@
       3.63,
       3.63,
       3.63,
-      3.63,
       3.63
     ],
     "uk_rate": [
@@ -805,11 +800,9 @@
       4.25,
       4.25,
       4.25,
-      4.25,
       4.25
     ],
     "us_10y": [
-      4.54,
       4.46,
       4.49,
       4.47,
@@ -886,7 +879,6 @@
       5.18
     ],
     "real_yield": [
-      2.21,
       2.13,
       2.16,
       2.14,
@@ -1053,7 +1045,6 @@
       14.87
     ],
     "dxy": [
-      99.95,
       99.86,
       99.75,
       99.63,
@@ -1130,7 +1121,6 @@
       100.97
     ],
     "gbp_usd": [
-      1.3372,
       1.3362,
       1.3414,
       1.345,
@@ -1207,7 +1197,6 @@
       1.3211
     ],
     "silver": [
-      64.6,
       63.88,
       67.86,
       70.07,
@@ -1284,7 +1273,6 @@
       64.25
     ],
     "oil": [
-      93.1,
       90.38,
       87.33,
       83.17,
@@ -1358,7 +1346,7 @@
       99.25,
       103.08,
       106.6,
-      104.32
+      97.44
     ],
     "gld_holdings": [
       411.5,
