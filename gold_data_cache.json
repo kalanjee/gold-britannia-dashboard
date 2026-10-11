@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-10T23:15:57.872379Z",
+  "last_updated": "2026-10-11T04:14:55.214315Z",
   "gold_spot_usd": 4216.3,
   "gold_spot_gbp": 3184.15,
   "gbp_usd": 1.3242,
@@ -13,12 +13,12 @@
       "name": "Gold Spot (XAU/USD)",
       "category": "Direct Price",
       "importance": "Critical",
-      "value": 4216.2998,
+      "value": 4216.3,
       "unit": "$",
       "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "No significant change",
-      "source": "yfinance"
+      "source": "\u2014"
     },
     {
       "id": 2,
@@ -217,11 +217,11 @@
       "name": "DXY (Dollar Index)",
       "category": "FX & Currency",
       "importance": "Very High",
-      "value": 102.21,
+      "value": 104,
       "unit": "",
-      "change_pct": -0.0,
-      "signal": "Bullish",
-      "reason": "Weakening dollar supports gold priced in USD",
+      "change_pct": 1.75,
+      "signal": "Bearish",
+      "reason": "Strengthening dollar weighs on gold",
       "source": "Yahoo Finance"
     },
     {
@@ -267,10 +267,10 @@
       "importance": "High",
       "value": 60.67,
       "unit": "$",
-      "change_pct": -0.0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
-      "source": "yfinance"
+      "source": "\u2014"
     },
     {
       "id": 23,
@@ -289,9 +289,9 @@
       "name": "Brent Crude Oil",
       "category": "Commodities",
       "importance": "Medium",
-      "value": 104.72,
+      "value": 80,
       "unit": "$",
-      "change_pct": 0.0,
+      "change_pct": -23.61,
       "signal": "Neutral",
       "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
@@ -301,9 +301,9 @@
       "name": "Copper Price",
       "category": "Commodities",
       "importance": "Low",
-      "value": 6.6425,
+      "value": 4.2,
       "unit": "$/lb",
-      "change_pct": -0.0,
+      "change_pct": -36.77,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -347,7 +347,6 @@
   ],
   "history": {
     "dates": [
-      "2026-06-25",
       "2026-06-26",
       "2026-06-29",
       "2026-06-30",
@@ -424,7 +423,6 @@
       "2026-10-09"
     ],
     "gold_spot_gbp": [
-      3056.75,
       3093.53,
       3050.18,
       3049.88,
@@ -501,7 +499,6 @@
       3184.15
     ],
     "gold_spot_usd": [
-      4047.6,
       4096.3,
       4038.9,
       4038.5,
@@ -578,7 +575,6 @@
       4216.3
     ],
     "britannia_est": [
-      3172.91,
       3211.08,
       3166.09,
       3165.77,
@@ -728,7 +724,6 @@
       3.75,
       3.75,
       3.75,
-      3.75,
       3.75
     ],
     "uk_rate": [
@@ -805,11 +800,9 @@
       4.25,
       4.25,
       4.25,
-      4.25,
       4.25
     ],
     "us_10y": [
-      4.39,
       4.37,
       4.37,
       4.42,
@@ -886,7 +879,6 @@
       5.24
     ],
     "real_yield": [
-      2.04,
       2.02,
       2.02,
       2.07,
@@ -1053,7 +1045,6 @@
       14.84
     ],
     "dxy": [
-      101.43,
       101.36,
       101.11,
       101.19,
@@ -1130,7 +1121,6 @@
       102.21
     ],
     "gbp_usd": [
-      1.3167,
       1.3188,
       1.3197,
       1.3254,
@@ -1207,7 +1197,6 @@
       1.3229
     ],
     "silver": [
-      58.35,
       59.22,
       58.17,
       59.48,
@@ -1281,10 +1270,9 @@
       61.17,
       59.9,
       59.06,
-      60.67
+      61.05
     ],
     "oil": [
-      75.26,
       71.99,
       73.15,
       72.92,
@@ -1453,5 +1441,5 @@
       384.58
     ]
   },
-  "move_probability_5pct": 41
+  "move_probability_5pct": 38
 }
