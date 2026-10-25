@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-25T08:57:48.724577Z",
+  "last_updated": "2026-10-25T15:36:48.411800Z",
   "gold_spot_usd": 4007.9,
   "gold_spot_gbp": 2996.67,
   "gbp_usd": 1.3374,
@@ -219,9 +219,9 @@
       "importance": "Very High",
       "value": 104,
       "unit": "",
-      "change_pct": 2.15,
-      "signal": "Bearish",
-      "reason": "Strengthening dollar weighs on gold",
+      "change_pct": 0.0,
+      "signal": "Neutral",
+      "reason": "Dollar stable",
       "source": "Yahoo Finance"
     },
     {
@@ -229,9 +229,9 @@
       "name": "EUR/USD",
       "category": "FX & Currency",
       "importance": "Medium",
-      "value": 1.1204,
+      "value": 1.1203,
       "unit": "",
-      "change_pct": 0.0,
+      "change_pct": -0.01,
       "signal": "Neutral",
       "reason": "Euro range-bound",
       "source": "openexchangerates"
@@ -267,7 +267,7 @@
       "importance": "High",
       "value": 53.71,
       "unit": "$",
-      "change_pct": -0.0,
+      "change_pct": 0.0,
       "signal": "Bullish",
       "reason": "Silver strength supports precious metals complex",
       "source": "\u2014"
@@ -291,7 +291,7 @@
       "importance": "Medium",
       "value": 80,
       "unit": "$",
-      "change_pct": -31.46,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Oil stable \u2014 limited impact",
       "source": "Yahoo Finance"
@@ -303,7 +303,7 @@
       "importance": "Low",
       "value": 4.2,
       "unit": "$/lb",
-      "change_pct": -35.15,
+      "change_pct": 0.0,
       "signal": "Neutral",
       "reason": "Copper reflects growth outlook, mixed for gold",
       "source": "Yahoo Finance"
@@ -1442,5 +1442,5 @@
       366.61
     ]
   },
-  "move_probability_5pct": 41
+  "move_probability_5pct": 42
 }
